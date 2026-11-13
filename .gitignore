@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Fusion / OS
+.DS_Store
+Thumbs.db
+*.f3d
+*.f3z
+
+# Exports and test output
+*.stl
+*.3mf
+*.step
+*.stp
+
+# User data never belongs in the repository
+layouts.json
+settings.json

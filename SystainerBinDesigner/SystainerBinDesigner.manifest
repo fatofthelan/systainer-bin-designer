@@ -1,0 +1,13 @@
+{
+  "autodeskProduct": "Fusion360",
+  "type": "addin",
+  "id": "db83342a-7da1-4008-b494-f36034ada825",
+  "author": "Systainer Bin Designer contributors",
+  "description": {
+    "": "Design Tanos/Festool Systainer organizer bins with custom compartments, then build, update and export them."
+  },
+  "version": "1.0.0",
+  "runOnStartup": true,
+  "supportedOS": "windows|mac",
+  "editEnabled": true
+}

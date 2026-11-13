@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Systainer Bin Designer</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <aside id="side">
+    <div id="sideScroll">
+      <h1>Systainer Bin Designer <small id="ver"></small></h1>
+      <div id="errors" role="alert"></div>
+
+      <details open>
+        <summary>Bin size</summary>
+        <div class="sec">
+          <div class="row"><label for="nx">Width (units)</label>
+            <span class="stepper"><button data-step="nx:-1" aria-label="Narrower">−</button><input id="nx" type="number" min="1" max="20" step="1"><button data-step="nx:1" aria-label="Wider">+</button></span></div>
+          <div class="row"><label for="ny">Depth (units)</label>
+            <span class="stepper"><button data-step="ny:-1" aria-label="Shallower">−</button><input id="ny" type="number" min="1" max="20" step="1"><button data-step="ny:1" aria-label="Deeper">+</button></span></div>
+          <div class="row"><label for="height">Height (mm)</label><input id="height" type="number" step="0.1" min="10" max="300"></div>
+          <div class="chips" id="heightChips"></div>
+          <div class="note stat" id="sizeInfo"></div>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Compartments</summary>
+        <div class="sec">
+          <div class="row"><label>Grid</label>
+            <span class="chips" style="margin:0"><button class="chip" data-sub="1">1 unit</button><button class="chip" data-sub="2">½ unit</button></span></div>
+          <div class="row"><label for="qCols">Quick split (columns × rows)</label>
+            <input id="qCols" type="number" min="1" value="3" style="width:46px" aria-label="Columns"> ×
+            <input id="qRows" type="number" min="1" value="2" style="width:46px" aria-label="Rows">
+            <button class="btn" id="qApply">Apply</button></div>
+          <p class="note">Click or drag along grid lines to add walls. Click a wall to remove it. Splits snap to the grid, and edge compartments take any remainder.</p>
+          <div id="compList"></div>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Dividers</summary>
+        <div class="sec">
+          <div class="row"><label for="dThick">Thickness (mm)</label><input id="dThick" type="number" step="0.05" min="0.4" max="10"></div>
+          <div class="row"><label for="dGap">Stop below rim top (mm)</label><input id="dGap" type="number" step="0.25" min="0"></div>
+          <p class="note" id="dividerInfo"></p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Fit &amp; tolerances</summary>
+        <div class="sec">
+          <div class="row"><label>Preset</label>
+            <span class="chips" style="margin:0"><button class="chip" data-preset="tuned">Tuned</button><button class="chip" data-preset="template">Template</button></span></div>
+          <p class="note"><b>Tuned</b> (default) was adjusted through test prints: a slightly smaller grid pitch, a larger opening for the floor nubs and a lower rim.
+            <b>Template</b> uses the original model's values, shown in brackets. If bins sit tight or loose in your organizer, adjust the values here.</p>
+          <div id="fitRows"></div>
+          <button class="btn" id="fitFromActive" style="width:100%;margin-top:6px">Load fit from active document</button>
+        </div>
+      </details>
+
+      <details>
+        <summary>Saved layouts</summary>
+        <div class="sec">
+          <div class="row"><input id="layoutName" type="text" maxlength="120" placeholder="Name, e.g. M3 screws" aria-label="Layout name"></div>
+          <div class="grid2"><button class="btn" id="layoutSave">Save layout</button><button class="btn" id="loadActive">Load from active bin</button></div>
+          <div id="layoutList" style="margin-top:6px"></div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Settings</summary>
+        <div class="sec">
+          <div class="row"><label for="bedSize">Print bed size (mm)</label><input id="bedSize" type="number" min="50" max="1000" step="1"></div>
+          <div class="row"><label for="autoSync">Auto-update the active bin after edits</label><input id="autoSync" type="checkbox"></div>
+        </div>
+      </details>
+    </div>
+
+    <div id="actions">
+      <div class="grid2">
+        <button class="btn primary" id="btnCreate">Create new bin</button>
+        <button class="btn" id="btnUpdate">Update active bin</button>
+      </div>
+      <div class="grid3">
+        <button class="btn" id="btnStl">STL…</button>
+        <button class="btn" id="btn3mf">3MF…</button>
+        <button class="btn" id="btnStep">STEP…</button>
+      </div>
+      <div id="status" aria-live="polite">Ready.</div>
+    </div>
+  </aside>
+
+  <main id="main">
+    <div id="toolbar">
+      <button class="btn" id="undo" title="Undo (Ctrl/Cmd+Z)">↶ Undo</button>
+      <button class="btn" id="redo" title="Redo (Ctrl/Cmd+Shift+Z)">↷ Redo</button>
+      <span class="sep"></span>
+      <button class="btn" id="clearWalls">Clear walls</button>
+      <button class="btn" id="everyUnit" title="A wall on every unit line">Wall every unit</button>
+      <span class="sep"></span>
+      <span class="note" id="hoverInfo"></span>
+    </div>
+    <div id="editorWrap"><canvas id="editor"></canvas><div class="overlay">Top view, front edge at the bottom</div><div class="overlay right stat" id="editorStats"></div></div>
+    <div id="viewWrap"><canvas id="view"></canvas><div class="overlay" id="viewHint">3D preview: drag to orbit, scroll to zoom, double-click to reset</div></div>
+  </main>
+</div>
+<script src="layout.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
