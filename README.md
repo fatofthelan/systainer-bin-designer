@@ -1,5 +1,7 @@
 # Systainer Bin Designer
 
+[![tests](https://github.com/fatofthelan/systainer-bin-designer/actions/workflows/tests.yml/badge.svg)](https://github.com/fatofthelan/systainer-bin-designer/actions/workflows/tests.yml)
+
 A free Autodesk Fusion add-in for designing 3D-printable organizer bins (insert boxes) for **Tanos / Festool Systainer³ organizers**.
 
 You size the bin on the organizer's grid and draw compartments in a top-view editor, with a live 3D preview. Then you build a fully parametric bin in Fusion and export it as STL, 3MF or STEP.
@@ -37,7 +39,7 @@ You size the bin on the organizer's grid and draw compartments in a top-view edi
 
 ## Installation
 
-1. Download this repository (green **Code** button › *Download ZIP*, or `git clone`).
+1. Download `SystainerBinDesigner-<version>.zip` from the [latest release](https://github.com/fatofthelan/systainer-bin-designer/releases/latest) and unzip it (or clone this repository).
 2. Put the `SystainerBinDesigner` folder (the one containing `SystainerBinDesigner.manifest`) into Fusion's add-ins folder:
    - **macOS:** `~/Library/Application Support/Autodesk/Autodesk Fusion 360/API/AddIns/`
    - **Windows:** `%APPDATA%\Autodesk\Autodesk Fusion 360\API\AddIns\`
